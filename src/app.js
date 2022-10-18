@@ -51,7 +51,7 @@ app.delete('/products/:id', async (req, res) => {
   );
 
   if (result.affectedRows === 0) {
-    return res.status(404).json({ message: 'Product not found' });
+    res.status(404).json({ message: 'Product not found' });
   }
   res.status(204).end();
 });
