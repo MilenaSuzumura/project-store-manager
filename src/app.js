@@ -30,4 +30,18 @@ app.get('/products/:id', async (req, res) => {
 
   res.status(200).json(result[0]);
 });
+
+app.post('/products', async (req, res) => {
+  const { name } = req.body;
+  const [result] = await connection.execute(
+    'INSERT INTO products (name) VALUES (?)', [name],
+  );
+  const newProduct = {
+    id: result.insertId,
+    name,
+  };
+
+  res.status(201).json(newProduct);
+});
+
 module.exports = app;
