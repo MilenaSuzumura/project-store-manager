@@ -44,4 +44,16 @@ app.post('/products', async (req, res) => {
   res.status(201).json(newProduct);
 });
 
+app.delete('/products/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  const [result] = await connection.execute(
+    'DELETE FROM products WHERE id = ?', [id],
+  );
+
+  if (result.affectedRows === 0) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  res.status(204).end();
+});
+
 module.exports = app;
