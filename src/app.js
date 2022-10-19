@@ -13,15 +13,17 @@ app.get('/', (_request, response) => {
 const connection = require('./connection');
 
 app.use(express.json());
+const models = require('./models/index');
+
+const { productsModel } = models;
 
 app.get('/products', async (_req, res) => {
-  const [result] = await connection.execute('SELECT * FROM products');
+  const result = await productsModel.getAll();
   res.status(200).json(result);
 });
 
 app.get('/products/:id', async (req, res) => {
-  const id = Number(req.params.id);
-  const [result] = await connection.execute(`SELECT * FROM products WHERE id = ${id}`);
+  const result = await productsModel.productId(req.params.id);
 
   if (result.length === 0) {
     const frase = { message: 'Product not found' };
@@ -46,7 +48,15 @@ app.post('/products', validatorName, async (req, res) => {
   res.status(201).json(newProduct);
 });
 
-app.delete('/products/:id', async (req, res) => {
+const validaId = require('./middlewares/validaId');
+// const validaQnt = require('./middlewares/validaQnt');
+
+app.get('/sales', validaId, async (_req, res) => {
+  const [result] = await connection.execute('SELECT * FROM sales');
+  res.status(200).json(result);
+});
+
+/* app.delete('/products/:id', async (req, res) => {
   const id = Number(req.params.id);
   const [result] = await connection.execute(
     'DELETE FROM products WHERE id = ?', [id],
@@ -57,10 +67,5 @@ app.delete('/products/:id', async (req, res) => {
   }
   res.status(204).end();
 });
-
-app.get('/sales', async (req, res) => {
-  const [result] = await connection.execute('SELECT * FROM sales');
-  res.status(200).json(result);
-});
-
+ */
 module.exports = app;
