@@ -31,7 +31,9 @@ app.get('/products/:id', async (req, res) => {
   res.status(200).json(result[0]);
 });
 
-app.post('/products', async (req, res) => {
+const validatorName = require('./middlewares/validatorName');
+
+app.post('/products', validatorName, async (req, res) => {
   const { name } = req.body;
   const [result] = await connection.execute(
     'INSERT INTO products (name) VALUES (?)', [name],
@@ -54,6 +56,11 @@ app.delete('/products/:id', async (req, res) => {
     res.status(404).json({ message: 'Product not found' });
   }
   res.status(204).end();
+});
+
+app.get('/sales', async (req, res) => {
+  const [result] = await connection.execute('SELECT * FROM sales');
+  res.status(200).json(result);
 });
 
 module.exports = app;
