@@ -8,7 +8,7 @@ chai.use(sinonChai);
 const productsModel = require('../../../src/models/products.models');
 const mocksProducts = require('./mocks/products');
 const { getAll, productId, insertName, updateProduct, deleteProduct } = productsModel;
-const { products, productIdMock } = mocksProducts;
+const { products, productIdMock, productInsert } = mocksProducts;
 
 const {} = require('./mocks/products');
 
@@ -42,4 +42,21 @@ describe('Testa os models de Products', function () {
       expect(res.json).to.have.been.calledOnceWith(productIdMock);
     });
   });
+  
+  describe('Testa os INSERT de cada função', function () {
+    it('Testa se insere um produto novo com InsertName', async function () {
+      const res = {};
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      const insert = { name: 'Action Figure do Thor' }
+
+      sinon.stub(productsModel, 'insertName')
+        .resolves({ status: 201, message: productInsert });
+
+      await insertProduct({ params: insert }, res);
+
+      expect(res.status).to.have.been.calledOnceWith(201);
+      expect(res.json).to.have.been.calledOnceWith(productInsert);
+    });
+  })
 });
