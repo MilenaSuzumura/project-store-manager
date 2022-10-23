@@ -35,9 +35,21 @@ productsRota.put('/:id', validatorName, validaId, async (req, res) => {
   res.status(200).json({ id, name });
 });
 
-productsRota.delete('/:id', async (req, res) => {
+/* productsRota.delete('/:id', async (req, res) => {
   const result = await productsModel.deleteProduct(req.params.id);
 
+  if (result.affectedRows === 0) {
+    res.status(404).json({ message: 'Product not found' });
+  }
+  res.status(204).end();
+}); */
+const connection = require('../connection');
+
+productsRota.delete('/products/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  const [result] = await connection.execute(
+    'DELETE FROM products WHERE id = ?', [id],
+  );
   if (result.affectedRows === 0) {
     res.status(404).json({ message: 'Product not found' });
   }
