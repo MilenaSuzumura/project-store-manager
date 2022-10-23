@@ -10,12 +10,14 @@ app.get('/', (_request, response) => {
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
 // você deve usar o arquivo index.js para executar sua aplicação 
-const connection = require('./connection');
 
 app.use(express.json());
 const models = require('./models/index');
 
-const { productsModel } = models;
+const { productsModel, salesModel } = models;
+const validador = require('./middlewares/index');
+
+const { validatorName, validaQnt, validaId } = validador;
 
 app.get('/products', async (_req, res) => {
   const result = await productsModel.getAll();
@@ -33,27 +35,21 @@ app.get('/products/:id', async (req, res) => {
   res.status(200).json(result[0]);
 });
 
-const validatorName = require('./middlewares/validatorName');
-
 app.post('/products', validatorName, async (req, res) => {
-  const { name } = req.body;
-  const [result] = await connection.execute(
-    'INSERT INTO products (name) VALUES (?)', [name],
-  );
-  const newProduct = {
-    id: result.insertId,
-    name,
-  };
-
-  res.status(201).json(newProduct);
+  const result = await productsModel.insertName(req.body.name);
+  res.status(201).json(result);
 });
 
-const validaId = require('./middlewares/validaId');
-// const validaQnt = require('./middlewares/validaQnt');
-
-app.get('/sales', validaId, async (_req, res) => {
-  const [result] = await connection.execute('SELECT * FROM sales');
-  res.status(200).json(result);
+app.post('/sales', validaId, validaQnt, async (req, res) => {
+  const [sales] = await salesModel.sales();
+  const newProduct = {
+    saleId: (sales.length + 1),
+    itemsSold: [],
+  };
+  const produtNew = newProduct.itemsSold.push(req.body);
+  const result = await salesModel.insertSalesProducts(produtNew);
+  
+  res.status(201).json(result);
 });
 
 /* app.delete('/products/:id', async (req, res) => {
