@@ -10,6 +10,14 @@ const sales = async () => {
   return result;
 };
 
+const salesId = async (idString) => {
+  const id = Number(idString);
+  const [result] = await connection.execute(
+    `SELECT * FROM sales_products WHERE id = ${id}`,
+  );
+  return result;
+};
+
 const insertSalesProducts = async (sale) => {
   const [result] = await connection.execute(
     'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
@@ -18,4 +26,4 @@ const insertSalesProducts = async (sale) => {
   return result;
 };
 
-module.exports = { salesProducts, sales, insertSalesProducts };
+module.exports = { salesProducts, sales, insertSalesProducts, salesId };

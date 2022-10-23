@@ -22,4 +22,19 @@ const insertName = async (name) => {
   return newProduct;
 };
 
-module.exports = { getAll, productId, insertName };
+const updateProduct = async (name, idString) => {
+  const id = Number(idString);
+  const [result] = await connection.execute(
+    'UPUDATE products SET name = ? WHERE id = ?', [name, id],
+  );
+  return result;
+};
+
+const deleteProduct = async (id) => {
+  const [result] = await connection.execute(
+    'DELETE FROM products WHERE id = ?', [id],
+  );
+  return result;
+};
+
+module.exports = { getAll, productId, insertName, updateProduct, deleteProduct };
