@@ -22,12 +22,10 @@ const insertName = async (name) => {
   return newProduct;
 };
 
-const updateProduct = async (name, idString) => {
-  const id = Number(idString);
-  const [result] = await connection.execute(
-    'UPUDATE products SET name = ? WHERE id = ?', [name, id],
+const updateProduct = async (name, id) => {
+  await connection.execute(
+    'UPDATE products SET name = ? WHERE id = ?', [name, id],
   );
-  return result;
 };
 
 const deleteProduct = async (id) => {

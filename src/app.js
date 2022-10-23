@@ -1,4 +1,5 @@
 const express = require('express');
+const productsRota = require('./rotas/products');
 
 const app = express();
 
@@ -14,37 +15,12 @@ app.get('/', (_request, response) => {
 app.use(express.json());
 const models = require('./models/index');
 
-const { productsModel, salesModel } = models;
+const { salesModel } = models;
 const validador = require('./middlewares/index');
 
-const { validatorName, validaQnt, validaId, salesValidation, validaProduto } = validador;
+const { validaQnt, validaId, salesValidation, validaProduto } = validador;
 
-app.get('/products', async (_req, res) => {
-  const result = await productsModel.getAll();
-  res.status(200).json(result);
-});
-
-app.get('/products/:id', async (req, res) => {
-  const result = await productsModel.productId(req.params.id);
-
-  if (result.length === 0) {
-    const frase = { message: 'Product not found' };
-    res.status(404).json(frase);
-  }
-
-  res.status(200).json(result[0]);
-});
-
-app.post('/products', validatorName, async (req, res) => {
-  const result = await productsModel.insertName(req.body.name);
-  res.status(201).json(result);
-});
-
-app.put('/products/:id', validatorName, validaProduto, async (req, res) => {
-  await productsModel.updateProduct(req.body.name, req.params.id);
-  const updateProductId = await productsModel.productId(req.params.id);
-  res.status(200).json(updateProductId[0]);
-});
+app.use('/products', productsRota);
 
 app.get('/sales', async (_req, res) => {
   const [result] = await salesModel.sales();
@@ -57,25 +33,16 @@ app.get('/sales/:id', salesValidation, async (req, res) => {
   res.status(200).json(result);
 });
 
-app.post('/sales', validaId, validaQnt, async (req, res) => {
+app.post('/sales', validaId, validaQnt, validaProduto, async (req, res) => {
   const [sales] = await salesModel.sales();
   const newProduct = {
     saleId: (sales.length + 1),
     itemsSold: [],
   };
   const produtNew = newProduct.itemsSold.push(req.body);
-  const result = await salesModel.insertSalesProducts(produtNew);
+  await salesModel.insertSalesProducts(produtNew);
   
-  res.status(201).json(result);
-});
-
-app.delete('/products/:id', async (req, res) => {
-  const result = await productsModel.deleteProduct(req.params.id);
-
-  if (result.affectedRows === 0) {
-    res.status(404).json({ message: 'Product not found' });
-  }
-  res.status(204).end();
+  res.status(201).json(newProduct);
 });
  
 module.exports = app;

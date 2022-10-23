@@ -1,0 +1,21 @@
+[
+  {
+    "_id": "2407296b-ae76-4ae0-b4d2-3b4780388c97",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/sales",
+    "url": "http://localhost:3000/sales",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-10-21T18:39:34.119Z",
+    "modified": "2022-10-23T17:37:22.646Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  productId: 1,\n  name: 'Existe'\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]
