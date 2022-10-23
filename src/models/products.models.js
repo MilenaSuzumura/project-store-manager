@@ -28,7 +28,8 @@ const updateProduct = async (name, id) => {
   );
 };
 
-const deleteProduct = async (id) => {
+const deleteProduct = async (idString) => {
+  const id = Number(idString);
   const [result] = await connection.execute(
     'DELETE FROM products WHERE id = ?', [id],
   );
