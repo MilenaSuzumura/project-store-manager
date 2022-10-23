@@ -6,11 +6,10 @@ const sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 
 const productsModel = require('../../../src/models/products.models');
+const { productsDelete } = require('./mocks/products');
 const mocksProducts = require('./mocks/products');
 const { getAll, productId, insertName, updateProduct, deleteProduct } = productsModel;
-const { products, productIdMock, productInsert, productsUpdate } = mocksProducts;
-
-const {} = require('./mocks/products');
+const { products, productIdMock, productInsert, productsUpdate, productsDelete } = mocksProducts;
 
 describe('Testa os models de Products', function () {
   describe('Testa os SELECT de cada função', function () {
@@ -61,7 +60,7 @@ describe('Testa os models de Products', function () {
   });
 
   describe('Testa os UPDATE de cada função', function () {
-    it('Testa se dá para atualizar um produto com updateProduct updateProduct',
+    it('Testa se dá para atualizar um produto com updateProduct',
       async function () {
         const res = {};
         res.status = sinon.stub().returns(res);
@@ -75,6 +74,24 @@ describe('Testa os models de Products', function () {
 
         expect(res.status).to.have.been.calledOnceWith(200);
         expect(res.json).to.have.been.calledOnceWith(productsUpdate);
+      });
+  });
+
+  describe('Testa o DELETE de cada função', function () {
+    it('Testa se remove um produto com deleteProduct', async function () {
+      const res = {};
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon.stub(productsModel, 'deleteProduct')
+        .resolves({ status: 204 });
+
+      await removeProduct({ params: { id: 1 } }, res);
+
+      expect(res.status).to.have.been.calledOnceWith(204);
+      expect(res.json).to.have.been.calledOnceWith(productsDelete);
     });
   })
+
+
 });
