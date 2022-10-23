@@ -46,18 +46,6 @@ app.put('/products/:id', validatorName, validaProduto, async (req, res) => {
   res.status(200).json(updateProductId[0]);
 });
 
-app.delete('/products/:id', async (req, res) => {
-  const result = await productsModel.productId(req.params.id);
-
-  if (result.length === 0) {
-    const frase = { message: 'Product not found' };
-    res.status(404).json(frase);
-  }
-
-  await productsModel.deleteProduct(req.params.id);
-  res.status(204).json();
-});
-
 app.get('/sales', async (_req, res) => {
   const [result] = await salesModel.sales();
   res.status(200).json(result);
@@ -81,16 +69,13 @@ app.post('/sales', validaId, validaQnt, async (req, res) => {
   res.status(201).json(result);
 });
 
-/* app.delete('/products/:id', async (req, res) => {
-  const id = Number(req.params.id);
-  const [result] = await connection.execute(
-    'DELETE FROM products WHERE id = ?', [id],
-  );
+app.delete('/products/:id', async (req, res) => {
+  const result = await productsModel.deleteProduct(req.params.id);
 
   if (result.affectedRows === 0) {
     res.status(404).json({ message: 'Product not found' });
   }
   res.status(204).end();
 });
- */
+ 
 module.exports = app;
