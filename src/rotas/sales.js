@@ -13,10 +13,9 @@ const controllers = require('../controllers/index');
 const { validaQnt, validaId, validaProduto /*  salesValidation */ } = validador;
 
 salesRota.post('/', validaId, validaQnt, validaProduto, async (req, res) => {
-  await controllers.insertSalesProducts(req.body);
-  const salesM = await salesModel.sales();
-   const resultadoFinal = {
-    id: (salesM.length - 1),
+  const id = await controllers.insertSalesProducts(req.body);
+  const resultadoFinal = {
+    id,
     itemsSold: req.body,
   };
   res.status(201).json(resultadoFinal);
