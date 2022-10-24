@@ -3,7 +3,7 @@ const models = require('../models/index');
 const { salesModel } = models;
 
 const salesValidation = async (req, res, next) => {
-  const [result] = await salesModel.sales();
+  const [result] = await salesModel.salesId();
   const id = parseInt(req.params.id, 10);
   const idSales = result.some((sale) => sale.id === id);
   if (!idSales) {
