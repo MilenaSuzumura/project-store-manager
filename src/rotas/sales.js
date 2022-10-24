@@ -13,7 +13,7 @@ const controllers = require('../controllers/index');
 const { validaQnt, validaId, validaProduto /*  salesValidation */ } = validador;
 
 salesRota.post('/', validaId, validaQnt, validaProduto, async (req, res) => {
-  await controllers.insertSalesProducts(req.body, res);
+  await controllers.insertSalesProducts(req.body);
   const salesM = await salesModel.sales();
    const resultadoFinal = {
     id: (salesM.length - 1),
@@ -26,17 +26,13 @@ salesRota.get('/', async (_req, res) => {
   const result = await salesModel.sales();
   res.status(200).json(result);
 });
-/* salesRota.get('/', async (_req, res) => {
-  const [result] = await salesModel.sales();
-  res.status(200).json(result);
-});
 
-salesRota.get('/:id', salesValidation, async (req, res) => {
+/* salesRota.get('/:id',salesValidation,  async (req, res) => {
   const { id } = req.body;
   const [result] = await salesModel.salesId(id);
   res.status(200).json(result);
-});
- */
+}); */
+
 /* salesRota.post('/', validaId, validaQnt, validaProduto, async (req, res) => {
   const [sales] = await salesModel.sales();
   const newProduct = {
