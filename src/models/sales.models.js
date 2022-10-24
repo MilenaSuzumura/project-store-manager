@@ -2,7 +2,7 @@ const connection = require('../connection');
 
 const cadastrarVenda = async (saleId, productId, quantity) => {
   const [result] = await connection.execute(
-    'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
+    'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
     [saleId, productId, quantity],
   );
   return result;

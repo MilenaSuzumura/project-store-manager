@@ -11,9 +11,9 @@ const insertSalesProducts = async (products) => {
     const mensagem = { saida: 404, message: 'Product not found' };
     return mensagem;
   } */
+  const saleDate = await salesModel.salesData();
   
   const promisesProductsInsert = products.map(async (product) => {
-    const saleDate = await salesModel.salesData();
     const result = await salesModel
       .cadastrarVenda(saleDate.insertId, product.productId, product.quantity);
     return result;

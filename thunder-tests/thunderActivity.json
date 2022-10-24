@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-10-23T21:34:41.101Z",
-    "modified": "2022-10-24T15:06:03.531Z",
+    "modified": "2022-10-24T15:17:18.347Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -36,7 +36,7 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2022-10-24T14:39:23.870Z",
-    "modified": "2022-10-24T14:56:45.215Z",
+    "modified": "2022-10-24T15:17:35.654Z",
     "headers": [],
     "params": [],
     "body": {
