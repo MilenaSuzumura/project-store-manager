@@ -13,7 +13,6 @@ const insertSalesProducts = async (products) => {
   } */
   
   const saleDate = await salesModel.salesData();
-  console.log(saleDate.insertId);
   const promisesProductsInsert = products.map(async (product) => {
     const result = await salesModel
       .cadastrarVenda(saleDate.insertId, product.productId, product.quantity);
