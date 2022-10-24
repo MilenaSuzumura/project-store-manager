@@ -1,4 +1,4 @@
-const { expect } = require('chai');
+/* const { expect } = require('chai');
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
@@ -94,4 +94,4 @@ describe('Testa os models de Products', function () {
   })
 
 
-});
+}); */
