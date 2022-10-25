@@ -15,8 +15,12 @@ const salesData = async () => {
 
 const salesId = async (idString) => {
   const id = Number(idString);
-  const [[result]] = await connection.execute(
-    `SELECT * FROM sales_products WHERE id = ${id}`,
+  const [result] = await connection.execute(
+    `SELECT product_id AS productId, quantity,
+date FROM StoreManager.sales_products AS products
+INNER JOIN StoreManager.sales AS sales
+ON products.sale_id = sales.id
+WHERE sale_id = ${id}`,
   );
   return result;
 };
@@ -27,7 +31,14 @@ const salesProducts = async () => {
 };
 
 const sales = async () => {
-  const [result] = await connection.execute('SELECT * FROM sales');
+  const [result] = await connection.execute(
+    `SELECT id, sale_id AS saleId,
+product_id AS productId, quantity,
+date FROM StoreManager.sales AS sales
+INNER JOIN StoreManager.sales_products AS products
+ON products.sale_id = sales.id
+ORDER BY sale_id ASC, product_id ASC`,
+  );
   return result;
 };
 
