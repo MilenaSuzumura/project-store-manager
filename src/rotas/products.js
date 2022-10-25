@@ -5,7 +5,7 @@ const validador = require('../middlewares/index');
 const productsRota = express.Router();
 
 const { productsModel } = models;
-const { validatorName, validaId } = validador;
+const { validatorName, validaProdutoId } = validador;
 
 productsRota.get('/', async (_req, res) => {
   const result = await productsModel.getAll();
@@ -28,11 +28,15 @@ productsRota.post('/', validatorName, async (req, res) => {
   res.status(201).json(result);
 });
 
-productsRota.put('/:id', validatorName, validaId, async (req, res) => {
+productsRota.put('/:id', validatorName, validaProdutoId, async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
   await productsModel.updateProduct(name, id);
-  res.status(200).json({ id, name });
+  const product = {
+    id,
+    name,
+  };
+  res.status(200).json(product);
 });
 
 productsRota.delete('/:id', async (req, res) => {
