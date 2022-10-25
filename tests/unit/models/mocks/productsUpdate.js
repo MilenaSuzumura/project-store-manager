@@ -1,7 +1,7 @@
-const products = [
+const productsUpdate = [
   {
     "id": 1,
-    "name": "Martelo de Thor"
+    "name": "Machado do Thor"
   },
   {
     "id": 2,
@@ -10,7 +10,11 @@ const products = [
   {
     "id": 3,
     "name": "Escudo do Capitão América"
+  },
+  {
+    "id": 4,
+    "name": "Action Figure do Thor"
   }
 ];
 
-module.exports = products;
+module.exports = productsUpdate;

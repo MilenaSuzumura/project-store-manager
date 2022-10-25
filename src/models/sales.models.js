@@ -10,6 +10,7 @@ const cadastrarVenda = async (saleId, productId, quantity) => {
 
 const salesData = async () => {
   const [result] = await connection.execute('INSERT INTO sales (date) VALUES (NOW())');
+  console.log(result);
   return result;
 };
 
