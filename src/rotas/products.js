@@ -1,27 +1,16 @@
 const express = require('express');
 const models = require('../models/index');
 const validador = require('../middlewares/index');
+const controllers = require('../controllers/index');
 
 const productsRota = express.Router();
 
 const { productsModel } = models;
 const { validatorName, validaProdutoId } = validador;
+const { allProducts, idProduct } = controllers;
 
-productsRota.get('/', async (_req, res) => {
-  const result = await productsModel.getAll();
-  res.status(200).json(result);
-});
-
-productsRota.get('/:id', async (req, res) => {
-  const result = await productsModel.productId(req.params.id);
-
-  if (result.length === 0) {
-    const frase = { message: 'Product not found' };
-    res.status(404).json(frase);
-  }
-
-  res.status(200).json(result[0]);
-});
+productsRota.get('/', allProducts);
+productsRota.get('/:id', idProduct);
 
 productsRota.post('/', validatorName, async (req, res) => {
   const result = await productsModel.insertName(req.body.name);
