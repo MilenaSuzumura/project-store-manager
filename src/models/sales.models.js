@@ -43,4 +43,19 @@ ORDER BY sale_id ASC, product_id ASC`,
   return result;
 };
 
-module.exports = { cadastrarVenda, sales, salesProducts, salesId, salesData };
+const deleteSales = async (idString) => {
+  const id = Number(idString);
+  const [result] = await connection.execute(
+    'DELETE FROM sales WHERE id = ?', [id],
+  );
+  return result;
+};
+
+module.exports = {
+  cadastrarVenda,
+sales,
+salesProducts,
+salesId,
+salesData,
+  deleteSales,
+};
