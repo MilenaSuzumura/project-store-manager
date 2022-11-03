@@ -8,11 +8,13 @@ const validaProdutoId = async (id) => {
     rota: 0,
     frase: {},
   };
+
   if (product.length === 0) {
     result.frase = [{ message: 'Product not found' }];
     result.rota = 404;
     return result;
   }
+
   result.rota = 200;
   result.frase = product;
   return result;
