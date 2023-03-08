@@ -8,11 +8,7 @@ OBS: ESSE PROJETO FOI DESENVOLVIDO NA TRYBE.
 ### Back-end:
 Desenvolvido usando: MYSQL, JavaScript, MSC, TDD ou/e Docker.
 
-<details>
-  <summary><strong>Instalando Dependências</strong></summary>
-  
-  ### Backend
-  
+## Instalando Dependências
   <details>
     <summary><strong>Executando com Docker:</strong></summary>
   
@@ -36,7 +32,6 @@ npm install
 ``` 
 
 Renomeie o arquivo `.env.exemple` para `.env` e configure-o para sua máquina.
-</details>
 </details>
 
 ## Executando aplicação
