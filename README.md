@@ -17,6 +17,16 @@ npm install
 
 #### Executando com Docker:
 
+```bash
+docker-compose up -d
+```
+
+OBS: VERIFIQUE SE NÃO EXISTE CONTAINERS ATIVOS UTILIZANDO A PORTA 3000.
+
+##### Para rodar o Container:
+> Opção 1: Use o comando `docker-compose run node npm test` para rodar os testes com Docker.
+
+> Opção 2: Use o comando `docker exec -it store_manager bash` para acessar o Container.
 
 ## Executando aplicação
 
