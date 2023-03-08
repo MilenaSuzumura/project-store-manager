@@ -1,40 +1,29 @@
-# My Awesome Project
+# Store Manager
+Store Manager é um projeto focado em criar, exibir, atualizar e excluir produtos e vendas utilizando a arquitetura MSC(model-service-controller).
 
-# Contexto
-Este projeto trata-se de uma ferramenta de back-office para armazenar e buscar dados de erros que ocorreram com clientes.
+OBS: ESSE PROJETO FOI DESENVOLVIDO NA TRYBE.
 
 ## Técnologias usadas
 
-Front-end:
-> Desenvolvido usando: React, Redux, CSS3, HTML5, Redis, ES6
-
-Back-end:
-> Desenvolvido usando: NodeJS, ExpressJS, MongoDB, MYSQL, ES6
-
+### Back-end:
+Desenvolvido usando: MYSQL, JavaScript, MSC, TDD ou/e Docker.
 
 ## Instalando Dependências
 
-> Backend
+### Backend
 ```bash
-cd api/ 
 npm install
 ``` 
-> Frontend
-```bash
-cd src/
-npm install
-``` 
+
+#### Executando com Docker:
+
+
 ## Executando aplicação
 
 * Para rodar o back-end:
 
   ```
   cd api/ && npm start
-  ```
-* Para rodar o front-end:
-
-  ```
-    cd src/ && npm start
   ```
 
 ## Executando Testes
