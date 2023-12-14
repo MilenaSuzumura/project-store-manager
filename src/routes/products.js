@@ -1,4 +1,7 @@
 const express = require('express');
+
+const { allProducts } = require('../controllers/products.controllers');
+
 const models = require('../models/index');
 const validador = require('../middlewares/index');
 const controllers = require('../controllers/index');
@@ -7,7 +10,7 @@ const productsRota = express.Router();
 
 const { productsModel } = models;
 const { validatorName, validaProdutoId } = validador;
-const { allProducts, idProduct } = controllers;
+const { idProduct } = controllers;
 
 productsRota.get('/', allProducts);
 productsRota.get('/:id', idProduct);
