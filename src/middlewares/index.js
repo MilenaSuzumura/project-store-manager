@@ -4,6 +4,7 @@ const validatorName = require('./validatorName');
 const validaProduto = require('./validaProduto');
 const validaSaleId = require('./validaSaleId');
 const validaProdutoId = require('./validaProdutoId');
+const productsValidation = require('./validation/products.validation');
 
 module.exports = {
   validaId,
@@ -12,4 +13,5 @@ module.exports = {
   validaProduto,
   validaSaleId,
   validaProdutoId,
+  productsValidation,
 };

@@ -1,19 +1,18 @@
 const express = require('express');
 
-const { allProducts } = require('../controllers/products.controllers');
+const { getAll, getId } = require('../controllers/products.controllers');
 
 const models = require('../models/index');
 const validador = require('../middlewares/index');
-const controllers = require('../controllers/index');
 
 const productsRota = express.Router();
 
 const { productsModel } = models;
-const { validatorName, validaProdutoId } = validador;
-const { idProduct } = controllers;
+const { validatorName, validaProdutoId, productsValidation } = validador;
+const { productId } = productsValidation;
 
-productsRota.get('/', allProducts);
-productsRota.get('/:id', idProduct);
+productsRota.get('/', getAll);
+productsRota.get('/:id', productId, getId);
 
 productsRota.post('/', validatorName, async (req, res) => {
   const result = await productsModel.insertName(req.body.name);
