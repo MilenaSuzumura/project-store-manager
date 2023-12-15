@@ -6,9 +6,9 @@ const getAll = async (_req, res) => {
 };
 
 const getId = async (req, res) => {
-  const result = await validaProdutoId(req.params.id);
+  const result = await productsService.getId(req.params.id);
 
-  res.status(result.rota).json(result);
+  return res.status(200).json(result);
 };
 
 module.exports = { getAll, getId };
