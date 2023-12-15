@@ -1,16 +1,28 @@
-const models = require('../../models/index');
+// const models = require('../../models/index');
 
-const { productsModel } = models;
+// const { productsModel } = models;
 
-const productId = async (req, res, next) => {
-  const { id } = req.params;
-  const product = await productsModel.productId(id);
-
+const validationProductId = (product) => {
   if (product.length === 0) {
-    return res.status(404).json({ message: 'Product not found' });
+    return {
+      status: 404,
+      message: { message: 'Product not found' },
+    };
   }
 
-  next();
+  return { status: 200, message: product };
 };
 
-module.exports = { productId };
+const validationProductName = (name) => {
+  if (name === undefined) {
+    return { status: 400, message: { message: '"name" is required' } };
+  }
+  if (name.length < 5) {
+    return {
+      status: 422,
+      message: { message: '"name" length must be at least 5 characters long' },
+    };
+  }
+};
+
+module.exports = { validationProductId, validationProductName };
