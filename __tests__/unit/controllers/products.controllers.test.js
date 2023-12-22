@@ -7,7 +7,8 @@ chai.use(sinonChai);
 
 const { productsControllers } = require('../../../src/controllers/index');
 const { productsServices } = require('../../../src/services/index');
-const { allProducts, newProduct } = require('./mocks/products');
+const { allProducts, newProduct } = require('../mocks/products');
+const { productNotFound } = require('../mocks/messageError');
 
 describe('Testa os Controllers de Products', function () {
   describe('Testa a função getAll', function () {
@@ -51,26 +52,55 @@ describe('Testa os Controllers de Products', function () {
       res.json = sinon.stub();
       sinon.stub(productsServices, 'createProduct').resolves({ status: 201, message: newProduct });
 
-      await productsControllers.getId(req, res);
+      await productsControllers.createProduct(req, res);
 
       expect(res.status).to.have.been.calledWith(201);
       expect(res.json).to.have.been.calledWith(newProduct);
     });
   });
 
-  describe('Testa a função createProduct', function () {
+  describe('Testa a função updateProduct', function () {
     beforeEach(() => sinon.restore());
-    it('Testa se cria um novo produto', async function () {
+    it('Testa se atualiza o nome do produto com id 1', async function () {
       const res = {};
-      const req = { body: { name: 'Albedo' } };
+      const req = { body: { name: 'Albedo' }, params: { id: 1 } };
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub();
-      sinon.stub(productsServices, 'createProduct').resolves({ status: 201, message: newProduct });
+      sinon.stub(productsServices, 'updateProduct').resolves({ status: 201, message: newProduct });
 
-      await productsControllers.getId(req, res);
+      await productsControllers.updateProduct(req, res);
 
       expect(res.status).to.have.been.calledWith(201);
       expect(res.json).to.have.been.calledWith(newProduct);
+    });
+  });
+
+  describe('Testa a função deleteProduct', function () {
+    beforeEach(() => sinon.restore());
+    it('Testa se a função deleta um produto', async function () {
+      const res = {};
+      const req = { params: { id: 1 } };
+      res.status = sinon.stub().returns(res);
+      res.end = sinon.stub();
+      sinon.stub(productsServices, 'deleteProduct').resolves();
+
+      await productsControllers.deleteProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(204);
+      expect(res.end).to.have.been.calledWith();
+    });
+
+    it('Testa se a função não encontra o produto', async function () {
+      const res = {};
+      const req = { params: { id: 100 } };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+      sinon.stub(productsServices, 'deleteProduct').resolves(productNotFound);
+
+      await productsControllers.deleteProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(productNotFound.status);
+      expect(res.json).to.have.been.calledWith(productNotFound.message);
     });
   });
 });
