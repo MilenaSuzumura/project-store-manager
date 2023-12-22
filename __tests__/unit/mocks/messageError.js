@@ -3,4 +3,14 @@ const productNotFound = {
   message: { message: 'Product not found' },
 };
 
-module.exports = { productNotFound };
+const nameLength = {
+  status: 422,
+  message: { message: "\"name\" length must be at least 5 characters long" },
+}
+
+const nameRequired = {
+  status: 400,
+  message: { message: "\"name\" is required" },
+}
+
+module.exports = { productNotFound, nameLength, nameRequired };
