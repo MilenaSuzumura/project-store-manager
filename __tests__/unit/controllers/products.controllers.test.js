@@ -5,40 +5,72 @@ const sinonChai = require('sinon-chai');
 
 chai.use(sinonChai);
 
-const controllers = require('../../../src/controllers/index');
-const { productsModel } = require('../../../src/models/index');
-const productService = require('../../../src/services/index');
-// const { allProducts, idProduct } = controllers;
-const products = require('./mocks/products');
+const { productsControllers } = require('../../../src/controllers/index');
+const { productsServices } = require('../../../src/services/index');
+const { allProducts, newProduct } = require('./mocks/products');
 
 describe('Testa os Controllers de Products', function () {
-  beforeEach(() => sinon.restore());
+  describe('Testa a função getAll', function () {
+    beforeEach(() => sinon.restore());
+    it('Testa se a função retorna todos os produtos existentes', async function () {
+      const res = {};
+      const req = {};
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+      sinon.stub(productsServices, 'getAll').resolves(allProducts);
 
-  it('Testa se a função getAll de retorna todos os produtos existentes', async function () {
-    const res = {};
-    const req = {};
-    res.status = sinon.stub().returns(res);
-    res.json = sinon.stub();
-    sinon.stub(productsModel, 'getAll').resolves(products);
+      await productsControllers.getAll(req, res);
 
-    await controllers.allProducts(req, res);
-
-    expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(products);
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(allProducts);
+    });
   });
 
-  /*   describe('Testa a função idProduct', function () {
-      it('Testa se retorna o produto com o id 1', async function () {
-        const res = {};
-        const req = { params: { id: 1 } };
-        res.status = sinon.stub().returns(res);
-        res.json = sinon.stub();
-        sinon.stub(productService, 'validaProdutoId').resolves(products[0]);
-  
-        await controllers.idProduct(req, res);
-  
-        expect(res.status).to.have.been.calledWith(200);
-        expect(res.json).to.have.been.calledWith(products[0]);
-      });
-    }); */
+  describe('Testa a função getId', function () {
+    beforeEach(() => sinon.restore());
+    it('Testa se retorna o produto com o id 1', async function () {
+      const res = {};
+      const req = { params: { id: 1 } };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+      sinon.stub(productsServices, 'getId').resolves({ status: 200, message: allProducts[0] });
+
+      await productsControllers.getId(req, res);
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(allProducts[0]);
+    });
+  });
+
+  describe('Testa a função createProduct', function () {
+    beforeEach(() => sinon.restore());
+    it('Testa se cria um novo produto', async function () {
+      const res = {};
+      const req = { body: { name: 'Albedo' } };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+      sinon.stub(productsServices, 'createProduct').resolves({ status: 201, message: newProduct });
+
+      await productsControllers.getId(req, res);
+
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith(newProduct);
+    });
+  });
+
+  describe('Testa a função createProduct', function () {
+    beforeEach(() => sinon.restore());
+    it('Testa se cria um novo produto', async function () {
+      const res = {};
+      const req = { body: { name: 'Albedo' } };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+      sinon.stub(productsServices, 'createProduct').resolves({ status: 201, message: newProduct });
+
+      await productsControllers.getId(req, res);
+
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith(newProduct);
+    });
+  });
 });
