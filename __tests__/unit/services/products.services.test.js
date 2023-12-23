@@ -82,26 +82,54 @@ describe('Testa os Services de Products', function () {
     });
   });
 
-
- /*  
- 
-
   describe('Testa a função updateProduct', function () {
     beforeEach(() => sinon.restore());
     it('Testa se atualiza o nome do produto com id 1', async function () {
       const res = {};
-      const req = { body: { name: 'Albedo' }, params: { id: 1 } };
       res.status = sinon.stub().returns(res);
-      res.json = sinon.stub();
-      sinon.stub(productsServices, 'updateProduct').resolves({ status: 201, message: newProduct });
+      sinon.stub(productsModel, 'updateProduct');
 
-      await productsControllers.updateProduct(req, res);
+      const result = await productsServices.updateProduct(newProduct.id, newProduct.name);
 
-      expect(res.status).to.have.been.calledWith(201);
-      expect(res.json).to.have.been.calledWith(newProduct);
+      expect(result.status).to.deep.equal(200);
+      expect(result.message).to.deep.equal(newProduct);
+    });
+
+    it('Testa se não atualiza o nome do produto se não encontrar o produto', async function () {
+      const res = {};
+      res.status = sinon.stub().returns(res);
+      sinon.stub(productsModel, 'productId').resolves([]);
+
+      const result = await productsServices.updateProduct(100, newProduct.name);
+
+      expect(result.status).to.deep.equal(productNotFound.status);
+      expect(result.message).to.deep.equal(productNotFound.message);
+    });
+
+    it('Testa se não atualiza o nome do produto se não tiver o novo nome', async function () {
+      const res = {};
+      res.status = sinon.stub().returns(res);
+      sinon.stub(productsModel, 'productId').resolves(1);
+
+      const result = await productsServices.updateProduct(1);
+
+      expect(result.status).to.deep.equal(nameRequired.status);
+      expect(result.message).to.deep.equal(nameRequired.message);
+    });
+
+    it('Testa se não atualiza o nome do produto se o novo nome não tiver mais de 5 caracters', async function () {
+      const res = {};
+      res.status = sinon.stub().returns(res);
+      sinon.stub(productsModel, 'productId').resolves(allProducts[0]);
+
+      const result = await productsServices.updateProduct(1, 'A');
+
+      expect(result.status).to.deep.equal(nameLength.status);
+      expect(result.message).to.deep.equal(nameLength.message);
     });
   });
 
+ /*  
   describe('Testa a função deleteProduct', function () {
     beforeEach(() => sinon.restore());
     it('Testa se a função deleta um produto', async function () {
