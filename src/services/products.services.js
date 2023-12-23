@@ -32,13 +32,13 @@ const createProduct = async (name) => {
 const updateProduct = async (id, name) => {
   const productId = await productsModel.productId(id);
   const validationId = validationProductId(productId);
-  
-  if (validationId) {
+
+  if (validationId.status === 404) {
     return validationId;
   }
 
   const validationName = validationProductName(name);
-  
+
   if (validationName) {
     return validationName;
   }
