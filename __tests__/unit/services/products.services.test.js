@@ -7,8 +7,8 @@ chai.use(sinonChai);
 
 const { productsServices } = require('../../../src/services/index');
 const { productsModel } = require('../../../src/models/index');
-const { allProducts, newProduct } = require('../mocks/products');
-const { productNotFound, nameLength, nameRequired } = require('../mocks/messageError');
+const { allProducts, newProduct, deleteProduct } = require('../mocks/products');
+const { productNotFound, nameLength, nameRequired, notDeleted } = require('../mocks/messageError');
 
 describe('Testa os Services de Products', function () {
   describe('Testa a função getAll', function () {
@@ -87,6 +87,7 @@ describe('Testa os Services de Products', function () {
     it('Testa se atualiza o nome do produto com id 1', async function () {
       const res = {};
       res.status = sinon.stub().returns(res);
+      sinon.stub(productsModel, 'productId').resolves(allProducts[0]);
       sinon.stub(productsModel, 'updateProduct');
 
       const result = await productsServices.updateProduct(newProduct.id, newProduct.name);
@@ -128,34 +129,28 @@ describe('Testa os Services de Products', function () {
       expect(result.message).to.deep.equal(nameLength.message);
     });
   });
-
- /*  
+ 
   describe('Testa a função deleteProduct', function () {
     beforeEach(() => sinon.restore());
     it('Testa se a função deleta um produto', async function () {
       const res = {};
-      const req = { params: { id: 1 } };
       res.status = sinon.stub().returns(res);
-      res.end = sinon.stub();
-      sinon.stub(productsServices, 'deleteProduct').resolves();
+      sinon.stub(productsModel, 'deleteProduct').resolves(deleteProduct);
 
-      await productsControllers.deleteProduct(req, res);
+      const result = await productsServices.deleteProduct(1);
 
-      expect(res.status).to.have.been.calledWith(204);
-      expect(res.end).to.have.been.calledWith();
+      expect(result).to.deep.equal();
     });
 
     it('Testa se a função não encontra o produto', async function () {
       const res = {};
-      const req = { params: { id: 100 } };
       res.status = sinon.stub().returns(res);
-      res.json = sinon.stub();
-      sinon.stub(productsServices, 'deleteProduct').resolves(productNotFound);
+      sinon.stub(productsModel, 'deleteProduct').resolves(notDeleted);
 
-      await productsControllers.deleteProduct(req, res);
+      const result = await productsServices.deleteProduct(100);
 
-      expect(res.status).to.have.been.calledWith(productNotFound.status);
-      expect(res.json).to.have.been.calledWith(productNotFound.message);
+      expect(result.status).to.deep.equal(productNotFound.status);
+      expect(result.message).to.deep.equal(productNotFound.message);
     });
-  }); */
+  });
 });

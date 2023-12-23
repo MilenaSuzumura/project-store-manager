@@ -13,4 +13,13 @@ const nameRequired = {
   message: { message: "\"name\" is required" },
 }
 
-module.exports = { productNotFound, nameLength, nameRequired };
+const notDeleted = {
+  fieldCount: 0,
+  affectedRows: 0,
+  insertId: 0,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0
+};
+
+module.exports = { productNotFound, nameLength, nameRequired, notDeleted };

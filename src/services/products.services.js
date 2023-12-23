@@ -49,7 +49,6 @@ const updateProduct = async (id, name) => {
     name,
   };
 
-  console.log(product)
   return {
     status: 200,
     message: product,
