@@ -18,4 +18,13 @@ const newProduct = {
   name: 'Albedo'
 };
 
-module.exports = { allProducts, newProduct };
+const deleteProduct = {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 0,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0
+}
+
+module.exports = { allProducts, newProduct, deleteProduct };
