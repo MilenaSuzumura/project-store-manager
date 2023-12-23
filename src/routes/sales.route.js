@@ -1,6 +1,14 @@
 const express = require('express');
 
-const salesRota = express.Router();
+const salesRoute = express.Router();
+
+const { salesControllers } = require('../controllers/index');
+const { getAll, getId } = salesControllers;
+
+salesRoute.get('/', getAll);
+salesRoute.get('/:id', getId)
+
+/*
 
 const models = require('../models/index');
 
@@ -19,17 +27,6 @@ salesRota.post('/', validaId, validaQnt, validaProduto, async (req, res) => {
   res.status(201).json(resultadoFinal);
 });
 
-salesRota.get('/', async (_req, res) => {
-  const result = await salesModel.sales();
-  res.status(200).json(result);
-});
-
-salesRota.get('/:id', validaSaleId, async (req, res) => {
-  const { id } = req.params;
-  const result = await salesModel.salesId(id);
-  res.status(200).json(result);
-});
-
 salesRota.delete('/:id', async (req, res) => {
   const result = await salesModel.deleteSales(req.params.id);
 
@@ -38,5 +35,6 @@ salesRota.delete('/:id', async (req, res) => {
   }
   res.status(204).end();
 });
+ */
 
-module.exports = salesRota;
+module.exports = salesRoute;

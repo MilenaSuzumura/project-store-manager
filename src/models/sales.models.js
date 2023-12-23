@@ -14,7 +14,7 @@ const salesData = async () => {
   return result;
 };
 
-const salesId = async (idString) => {
+const getIdSales = async (idString) => {
   const id = Number(idString);
   const [result] = await connection.execute(
     `SELECT product_id AS productId, quantity,
@@ -31,7 +31,7 @@ const salesProducts = async () => {
   return result;
 };
 
-const sales = async () => {
+const getAllSales = async () => {
   const [result] = await connection.execute(
     `SELECT id, sale_id AS saleId,
 product_id AS productId, quantity,
@@ -53,9 +53,9 @@ const deleteSales = async (idString) => {
 
 module.exports = {
   cadastrarVenda,
-sales,
+  getAllSales,
 salesProducts,
-salesId,
+getIdSales,
 salesData,
   deleteSales,
 };
