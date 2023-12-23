@@ -8,6 +8,7 @@ chai.use(sinonChai);
 
 const { productsModel } = require('../../../src/models/index');
 const { allProducts, newProduct, deleteProduct } = require('../mocks/products');
+const { notDeleted } = require('../mocks/messageError');
 
 describe('Testa os models de Products', function () {
   beforeEach(() => sinon.restore());
@@ -36,7 +37,7 @@ describe('Testa os models de Products', function () {
   });
 
   it('Testa se insere um produto novo com updateProduct', async function () {
-    sinon.stub(connection, 'execute').resolves();
+    sinon.stub(connection, 'execute');
 
     const result = await productsModel.updateProduct('Machado do Thor');
 
@@ -49,5 +50,13 @@ describe('Testa os models de Products', function () {
     const result = await productsModel.deleteProduct('1');
 
     expect(result).to.be.equal(deleteProduct);
+  });
+
+  it('Testa se não remove um produto com deleteProduct', async function () {
+    sinon.stub(connection, 'execute').resolves([notDeleted]);
+
+    const result = await productsModel.deleteProduct('100');
+
+    expect(result).to.be.equal(notDeleted);
   });
 });
