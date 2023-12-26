@@ -3,29 +3,16 @@ const express = require('express');
 const salesRoute = express.Router();
 
 const { salesControllers } = require('../controllers/index');
-const { getAll, getId } = salesControllers;
+const { getAll, getId, createSales } = salesControllers;
 
 salesRoute.get('/', getAll);
-salesRoute.get('/:id', getId)
+salesRoute.get('/:id', getId);
+salesRoute.post('/', createSales);
 
 /*
-
 const models = require('../models/index');
 
 const { salesModel } = models;
-const validador = require('../middlewares/index');
-const controllers = require('../controllers/insertSalesProducts');
-
-const { validaQnt, validaId, validaProduto, validaSaleId } = validador;
-
-salesRota.post('/', validaId, validaQnt, validaProduto, async (req, res) => {
-  const id = await controllers(req.body);
-  const resultadoFinal = {
-    id,
-    itemsSold: [...req.body],
-  };
-  res.status(201).json(resultadoFinal);
-});
 
 salesRota.delete('/:id', async (req, res) => {
   const result = await salesModel.deleteSales(req.params.id);

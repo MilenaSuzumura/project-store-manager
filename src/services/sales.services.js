@@ -1,4 +1,4 @@
-const { validationSaleId } = require('../middlewares/validation/sales.validation');
+const { validationAllSales } = require('../middlewares/validation/sales.validation');
 const { salesModel } = require('../models/index');
 
 const getAll = async () => await salesModel.getAllSales();
@@ -11,6 +11,28 @@ const getId = async (id) => {
   }
 
   return { status: 200, message: sale[0] };
-}
+};
 
-module.exports = { getAll, getId };
+const createSales = async (products) => {
+  const validation = await validationAllSales(products);
+
+  if (validation) {
+    return validation;
+  }
+
+  const saleDate = await salesModel.salesData();
+  await Promise.all(products.map(async (product) => {
+    const result = await salesModel
+      .createSale(saleDate.insertId, product.productId, product.quantity);
+    return result;
+  }));
+
+  const result = {
+    id: saleDate.insertId,
+    itemsSold: [...products],
+  };
+
+  return { status: 201, message: result };
+};
+
+module.exports = { getAll, getId, createSales };

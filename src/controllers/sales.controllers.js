@@ -11,4 +11,11 @@ const getId = async (req, res) => {
   return res.status(result.status).json(result.message);
 };
 
-module.exports = { getAll, getId };
+const createSales = async (req, res) => {
+  const products = req.body;
+  const result = await salesServices.createSales(products);
+
+  return res.status(result.status).json(result.message);
+};
+
+module.exports = { getAll, getId, createSales };
