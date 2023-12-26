@@ -7,11 +7,10 @@ const connection = require('../../../src/connection');
 chai.use(sinonChai);
 
 const { salesModel } = require('../../../src/models/index');
-// const { getAll, productId, insertName, updateProduct, deleteProduct } = model.productsModel;
 
-// const mocksProducts = require('./mocks/productsModelMocks');
-const { allProducts, newProduct, deleteProduct } = require('../mocks/products');
 const { allSales, createSales, insertId } = require('../mocks/sales');
+
+const { deleteProduct } = require('../mocks/products');
 const { notDeleted } = require('../mocks/messageError');
 
 describe('Testa a model Sales', function () {

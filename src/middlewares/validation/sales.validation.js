@@ -8,7 +8,7 @@ const validationProductId = (products) => {
     };
   }
 
-  const productsId = products.some((product) => product.productId);
+  const productsId = products.every((product) => product.productId);
 
   if (!productsId) {
     return {
@@ -19,7 +19,7 @@ const validationProductId = (products) => {
 };
 
 const validationQuantity = (products) => {
-  const undefinedProduct = products.some((product) => product.quantity !== undefined);
+  const undefinedProduct = products.every((product) => product.quantity !== undefined);
 
   if (!undefinedProduct) {
     return {
@@ -28,7 +28,7 @@ const validationQuantity = (products) => {
     };
   }
 
-  const productQuantity = products.some((product) => (parseInt(product.quantity, 10) > 0));
+  const productQuantity = products.every((product) => (parseInt(product.quantity, 10) > 0));
 
   if (!productQuantity) {
     return {

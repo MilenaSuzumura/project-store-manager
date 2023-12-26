@@ -30,4 +30,10 @@ const insertId = {
   warningStatus: 0
 };
 
-module.exports = { allSales, createSales, insertId };
+const newSales = [{
+  saleId: 2,
+  productId: 2,
+  quantity: 5
+}]
+
+module.exports = { allSales, createSales, insertId, newSales };
