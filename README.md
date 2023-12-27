@@ -154,50 +154,29 @@ Utilizado para retornar as informações de todas as compras.
 
 </details>
 
-<!--
 <details>
-<summary>Endpoint POST /categories</summary><br />
-Utilizado para criar uma nova categoria. Para isso, necessita de um nome e de um token valido. Caso as informações estejam corretas, retornara as informações da nova categoria.
+<summary>Endpoint GET /sales/:id</summary><br />
+Utilizado para retornar as informações da compra com o id correspondente que contém no banco de dados.
 
 ##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-post-categories" src="/images-readme/post-categories-exemplo-entrada.png">
+<img alt="imagem-exemplo-entrada-correta-get-sales-id" src="/images-readme/get-sales-id-exemplo-entrada.png">
 
 ##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-post-categories" src="/images-readme/post-categories-exemplo-saida.png">
+<img alt="imagem-exemplo-saida-correta-get-sales-id" src="/images-readme/get-sales-id-exemplo-saida.png">
 
-#### Inserindo informações incorretas
-Existem quatro cenários onde a saída acima pode não ser retornada: não conter o nome da categoria, a string name estar vazia, caso não tenha o token e um token invalido.
+#### Mensagens de erro
+Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenhuma compra.
 
-<strong>Exemplo caso não contenha o name:</strong>
+##### Caso não exista a compra com aquele id no banco de dados, o retorno será:
 ```
 {
-  "message": "\"name\" is required"
-}
-```
-
-<strong>Exemplo caso name seja uma string vazia:</strong>
-```
-{
-  "message": "\"name\" is not allowed to be empty"
-}
-```
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
+  "message": "Sale not found"
 }
 ```
 
 </details>
 
+<!--
 <details>
 <summary>Endpoint GET /categories</summary><br />
 Utilizado para retornar as informações de todas as categorias que contém no banco de dados, porém é necessário ter um token para isso.
