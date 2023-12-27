@@ -261,7 +261,7 @@ Para rodar um teste específico:
 
 exemplo:
 `npm test post`
+-->
 
 
-
-<strong>OBS:</strong> Os testes irão rodar com os testes de cobertura -->
+<strong>OBS:</strong> Os testes irão rodar com os testes de cobertura
