@@ -1,5 +1,5 @@
 const validationProductId = (product) => {
-  if (product.length === 0) {
+  if (!product || product.length === 0) {
     return {
       status: 404,
       message: { message: 'Product not found' },
