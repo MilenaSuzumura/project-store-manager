@@ -176,87 +176,42 @@ Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenh
 
 </details>
 
-<!--
 <details>
-<summary>Endpoint GET /categories</summary><br />
-Utilizado para retornar as informações de todas as categorias que contém no banco de dados, porém é necessário ter um token para isso.
+<summary>Endpoint POST /sales</summary><br />
+Utilizado para criar uma nova compra. Para isso, necessita de array que contém objetos com um id do produto e a quantidade do produto.
 
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-categories" src="/images-readme/get-categories-exemplo-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-categories" src="/images-readme/get-categories-exemplo-saida.png">
-
-#### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso não tenha o token e um token invalido.
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
-
-</details>
-
-<details>
-<summary>Endpoint POST /post</summary><br />
-Utilizado para criar um novo post. Para isso, necessita de um nome, email, senha e uma imagem. Assim como o login, retornará um token caso todas as informações enviadas foram validadas corretamente.
 
 ##### Informações necessárias:
-* <strong>title:</strong> É o título do post e deve ser enviado como string. É obrigatório.
-* <strong>content:</strong> É o conteúdo do post e deve ser enviado como string. É obrigatório.
-* <strong>categoryIds:</strong> É um array de números com as categorias ao qual o post pertence e precisa ter pelo menos 1 id de categoria. É obrigatório.
+* <strong>productId:</strong> É o id do produto e deve ser enviado como int. É obrigatório.
+* <strong>quantity:</strong> É a quantidade do produto. Deve ser enviado como int e o número deve ser acima de 0. É obrigatório.
 
 ##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-post-post" src="/images-readme/post-post-exemplo-entrada.png">
+<img alt="imagem-exemplo-de-entrada-correta-post-sales" src="/images-readme/post-sales-exemplo-entrada.png">
 
 ##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-post-post" src="/images-readme/post-post-exemplo-saida.png">
+<img alt="imagem-exemplo-de-saida-correta-post-sales" src="/images-readme/post-sales-exemplo-saida.png">
 
 #### Inserindo informações incorretas
 Existem dois cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima) e caso falte alguma das informações obrigatórias. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
 
-<strong>Exemplo caso não preencha os requisitos necessários:</strong>
+##### Exemplo caso esteja faltando alguma das informações obrigatórias
 ```
 {
-  "message": "Some required fields are missing"
+  "message": "\"productId\" is required"
 }
 ```
 
-<strong>Exemplo caso esteja faltando alguma das informações obrigatórias</strong>
+##### Exemplo caso não preencha os requisitos necessários:
 ```
 {
-  "message": "\"content\" is required"
-}
-```
-
-##### Além disso, pode ter os erros do token.
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
+  "message": "\"quantity\" must be greater than or equal to 1"
 }
 ```
 
 </details>
 
-</details>
+
+<!--
 
 <details>
 <summary>Endpoint GET /post</summary><br />
