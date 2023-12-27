@@ -210,77 +210,29 @@ Existem dois cenários onde a saída acima pode não ser retornada: caso não pr
 
 </details>
 
+<details>
+<summary>Endpoint DELETE /sales/:id</summary><br />
+Utilizado para deletar as informações da compra com o id correspondente que contém no banco de dados.
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-entrada-correta-delete-sales-id" src="/images-readme/delete-sales-id-exemplo-entrada.png">
+
+##### Exemplo de saída:
+<img alt="imagem-exemplo-saida-correta-delete-sales-id" src="/images-readme/delete-products-id-exemplo-saida.png">
+
+#### Mensagens de erro
+Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenhuma compra.
+
+##### Caso não exista a compra com aquele id no banco de dados, o retorno será:
+```
+{
+  "message": "Sale not found"
+}
+```
+
+</details>
 
 <!--
-
-<details>
-<summary>Endpoint GET /post</summary><br />
-Utilizado para retornar as informações de todas as postagens que contém no banco de dados, porém é necessário ter um token para isso.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-post" src="/images-readme/get-post-exemplo-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-post" src="/images-readme/get-post-exemplo-saida.png">
-
-
-#### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso não tenha o token e um token invalido.
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
-
-</details>
-
-<details>
-<summary>Endpoint GET /post/:id</summary><br />
-Utilizado para retornar as informações das postagens com o id que está no url que contém no banco de dados, porém é necessário ter um token para isso.
-
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-post-id" src="/images-readme/get-post-id-exemplo-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-post-id" src="/images-readme/get-post-id-exemplo-saida.png">
-
-
-#### Inserindo informações incorretas
-Existem três cenários onde a saída acima pode não ser retornada: caso não exista post com aquele id, não tenha o token e um token invalido.
-
-<strong>Caso não exista post com aquele no banco de dados, o retorno será:</strong>
-```
-{
-  "message": "Post does not exist"
-}
-```
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
-
-</details>
-
-<strong>OBS:</strong> Existe o Endpoint GET /search, porém não funciona.
 
 ## Utilizando o docker
 Para criar os containers, execute: `docker-compose up -d`
