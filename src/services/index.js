@@ -1,5 +1,7 @@
-const validaProdutoId = require('./validaProductId');
+const productsServices = require('./products.services');
+const salesServices = require('./sales.services');
 
 module.exports = {
-  validaProdutoId,
+  productsServices,
+  salesServices
 };

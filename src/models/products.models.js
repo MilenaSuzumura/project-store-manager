@@ -8,7 +8,7 @@ const getAll = async () => {
 const productId = async (idString) => {
   const id = Number(idString);
   const [result] = await connection.execute(`SELECT * FROM products WHERE id = ${id}`);
-  return result;
+  return result[0];
 };
 
 const insertName = async (name) => {
