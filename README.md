@@ -120,6 +120,28 @@ Existem dois cenários onde a saída acima pode não ser retornada: caso não se
 
 </details>
 
+<details>
+<summary>Endpoint DELETE /products/:id</summary><br />
+Utilizado para deletar o produto com o id correspondente.
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-entrada-correta-delete-products-id" src="/images-readme/delete-products-id-exemplo-entrada.png">
+
+##### Exemplo de saída:
+<img alt="imagem-exemplo-saída-correta-delete-products-id" src="/images-readme/delete-products-id-exemplo-saida.png">
+
+#### Mensagens de erro
+Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenhum produto.
+
+##### Caso não exista produto com aquele id no banco de dados, o retorno será:
+```
+{
+  "message": "Product not found"
+}
+```
+
+</details>
+
 <!--
 <details>
 <summary>Endpoint GET /user/:id</summary><br />
