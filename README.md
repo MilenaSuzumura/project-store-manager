@@ -4,24 +4,21 @@ Store Manager é um projeto focado em arquitetar e desenvolver uma API de gerenc
 
 <strong>OBS:</strong> ESSE PROJETO FOI DESENVOLVIDO NA TRYBE.
 
-<!--
-
 ## Técnologias usadas
 * JavaScript;
 * Node.js;
 * Express.js;
 * Sequelize.js;
-* Json web tokens;
-* DotEnv;
-* Joi;
 * Docker;
 * MySQL;
+* DotEnv;
 * Jest;
 * Mock;
 * Sinon;
 * Chai;
 * Chai-http.
 
+<!--
 ## Rotas, entradas e saídas
 
 <details>
