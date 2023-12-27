@@ -232,8 +232,6 @@ Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenh
 
 </details>
 
-<!--
-
 ## Utilizando o docker
 Para criar os containers, execute: `docker-compose up -d`
 
@@ -243,7 +241,7 @@ Para abrir o terminar do container, execute: `docker exec -it blogs_api bash`
   `npm install`
 
 ## Banco de dados
-Para criar o banco de dados, execute: `npm run prestart`
+Para criar o banco de dados, execute: `npm run migration`
 
 Para popular o banco de dados: `npm run seed`
 
