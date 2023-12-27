@@ -59,6 +59,7 @@ Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenh
 Utilizado para criar e adicionar um novo produto no banco de dados. O banco de dados exige que o usuário insira somente um nome com, no mínimo, 5 caracters.
 
 ##### Informações necessárias:
+
 * <strong>name:</strong> É o nome do produto. Deve ser enviado como string e o mínimo de caracters é 5. É obrigatório.
 
 ##### Exemplo de entrada:
@@ -86,43 +87,40 @@ Existem dois cenários onde a saída acima pode não ser retornada: caso não se
 
 </details>
 
-
-<!--
 <details>
-<summary>Endpoint POST /user</summary><br />
-Utilizado para criar um novo usuário. Para isso, necessita de um nome, email, senha e uma imagem. Assim como o login, retornará um token caso todas as informações enviadas foram validadas corretamente.
+<summary>Endpoint PUT /products/:id</summary><br />
+Utilizado para atualizar o nome do produto com o id correspondente. Para isso, é necessário que o usuário insira somente um nome com, no mínimo, 5 caracters.
 
 ##### Informações necessárias:
 
-* <strong>email:</strong> É o email e deve ser enviado como string. É obrigatório.
-* <strong>password:</strong> É a senha. Deve ser enviado como string e deve conter no mínimo 6 caracter. É obrigatório.
-* <strong>image:</strong> É uma imagem ou foto de usuário e deve ser enviado como string. Esse é o único que não é obrigatório. 
+* <strong>name:</strong> É o nome do produto. Deve ser enviado como string e o mínimo de caracters é 5. É obrigatório.
 
 ##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-post-user" src="/images-readme/post-user-exemplo-de-entrada.png">
+<img alt="imagem-exemplo-entrada-correta-put-products-id" src="/images-readme/put-products-id-exemplo-entrada.png">
 
 ##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saída-correta-post-user" src="/images-readme/post-login-exemplo-de-saida.png">
+<img alt="imagem-exemplo-saída-correta-put-products-id" src="/images-readme/put-products-id-exemplo-saida.png">
 
-#### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso não preencha os requisitos necessários(explicados nas Informações Necessárias acima) e caso falte alguma das informações obrigatórias. Cada um deles terá uma mensagem diferente avisando o motivo de estar incorreta.
+#### Messagens de erro
+Existem dois cenários onde a saída acima pode não ser retornada: caso não seja enviado um nome e caso o nome não tenha, pelo menos, 5 caracters.
 
-<strong>Exemplo caso não preencha os requisitos necessários:</strong>
+<strong>Retorno para caso falte o nome:</strong>
 ```
 {
-  "message": "\"password\" length must be at least 6 characters long"
+  "message": "\"name\" is required"
 }
 ```
 
-<strong>Exemplo caso esteja faltando alguma das informações obrigatórias</strong>
+<strong>Retorno para caso name tenha menos de 5 caracters:</strong>
 ```
 {
-  "message": "\"password\" is required"
+  "message": "\"name\" length must be at least 5 characters long"
 }
 ```
 
 </details>
 
+<!--
 <details>
 <summary>Endpoint GET /user/:id</summary><br />
 Utilizado para retornar as informações do usuário com o id que está no url que contém no banco de dados, porém é necessário ter um token para isso.
