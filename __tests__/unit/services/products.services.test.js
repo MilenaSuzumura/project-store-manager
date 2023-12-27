@@ -14,8 +14,6 @@ describe('Testa os Services de Products', function () {
   describe('Testa a função getAll', function () {
     beforeEach(() => sinon.restore());
     it('Testa se a função retorna todos os produtos existentes', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'getAll').resolves(allProducts);
 
       const result = await productsServices.getAll();
@@ -27,8 +25,6 @@ describe('Testa os Services de Products', function () {
   describe('Testa a função getId', function () {
     beforeEach(() => sinon.restore());
     it('Testa se retorna o produto com o id 1', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'productId').resolves(allProducts[0]);
 
       const result = await productsServices.getId(1);
@@ -37,8 +33,6 @@ describe('Testa os Services de Products', function () {
     });
 
     it('Testa se retorna mensagem de erro caso não tenha encontrado o produto', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'productId').resolves([]);
 
       const result = await productsServices.getId(1);
@@ -50,8 +44,6 @@ describe('Testa os Services de Products', function () {
   describe('Testa a função createProduct', function () {
     beforeEach(() => sinon.restore());
     it('Testa se cria um novo produto', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'insertName').resolves(newProduct);
 
       const result = await productsServices.createProduct(newProduct.name);
@@ -60,8 +52,6 @@ describe('Testa os Services de Products', function () {
     });
 
     it('Testa se não cria um novo produto se não tiver um nome maior que 5 caracters', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'insertName').resolves(newProduct);
 
       const result = await productsServices.createProduct('A');
@@ -71,8 +61,6 @@ describe('Testa os Services de Products', function () {
     });
 
     it('Testa se não cria um novo produto se não tiver um nome', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'insertName').resolves(newProduct);
 
       const result = await productsServices.createProduct();
@@ -85,8 +73,6 @@ describe('Testa os Services de Products', function () {
   describe('Testa a função updateProduct', function () {
     beforeEach(() => sinon.restore());
     it('Testa se atualiza o nome do produto com id 1', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'productId').resolves(allProducts[0]);
       sinon.stub(productsModel, 'updateProduct');
 
@@ -97,8 +83,6 @@ describe('Testa os Services de Products', function () {
     });
 
     it('Testa se não atualiza o nome do produto se não encontrar o produto', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'productId').resolves([]);
 
       const result = await productsServices.updateProduct(100, newProduct.name);
@@ -108,8 +92,6 @@ describe('Testa os Services de Products', function () {
     });
 
     it('Testa se não atualiza o nome do produto se não tiver o novo nome', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'productId').resolves(1);
 
       const result = await productsServices.updateProduct(1);
@@ -119,8 +101,6 @@ describe('Testa os Services de Products', function () {
     });
 
     it('Testa se não atualiza o nome do produto se o novo nome não tiver mais de 5 caracters', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'productId').resolves(allProducts[0]);
 
       const result = await productsServices.updateProduct(1, 'A');
@@ -133,8 +113,6 @@ describe('Testa os Services de Products', function () {
   describe('Testa a função deleteProduct', function () {
     beforeEach(() => sinon.restore());
     it('Testa se a função deleta um produto', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'deleteProduct').resolves(deleteProduct);
 
       const result = await productsServices.deleteProduct(1);
@@ -143,8 +121,6 @@ describe('Testa os Services de Products', function () {
     });
 
     it('Testa se a função não encontra o produto', async function () {
-      const res = {};
-      res.status = sinon.stub().returns(res);
       sinon.stub(productsModel, 'deleteProduct').resolves(notDeleted);
 
       const result = await productsServices.deleteProduct(100);
