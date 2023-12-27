@@ -142,40 +142,19 @@ Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenh
 
 </details>
 
-<!--
 <details>
-<summary>Endpoint GET /user/:id</summary><br />
-Utilizado para retornar as informações do usuário com o id que está no url que contém no banco de dados, porém é necessário ter um token para isso.
+<summary>Endpoint GET /sales</summary><br />
+Utilizado para retornar as informações de todas as compras.
 
 ##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-user-id" src="/images-readme/get-user-id-exemplo-de-entrada.png">
+<img alt="imagem-exemplo-entrada-correta-get-sales" src="/images-readme/get-sales-exemplo-entrada.png">
 
 ##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-user-id" src="/images-readme/get-user-id-exemplo-resposta.png">
-
-<strong>Caso não exista usuário com aquele id no banco de dados, o retorno será:</strong>
-```
-{
-  "message": "Product not found"
-}
-```
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
+<img alt="imagem-exemplo-saida-correta-get-sales" src="/images-readme/get-sales-exemplo-saida.png">
 
 </details>
 
+<!--
 <details>
 <summary>Endpoint POST /categories</summary><br />
 Utilizado para criar uma nova categoria. Para isso, necessita de um nome e de um token valido. Caso as informações estejam corretas, retornara as informações da nova categoria.
