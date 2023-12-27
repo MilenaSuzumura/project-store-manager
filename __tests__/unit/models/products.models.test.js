@@ -21,7 +21,7 @@ describe('Testa os models de Products', function () {
   });
 
   it('Testa se retorna um produto pelo id usando productId', async function () {
-    sinon.stub(connection, 'execute').resolves([allProducts[0]]);
+    sinon.stub(connection, 'execute').resolves([[allProducts[0]]]);
 
     const result = await productsModel.productId('1');
 

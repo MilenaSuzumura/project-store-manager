@@ -1,7 +1,3 @@
-// const models = require('../../models/index');
-
-// const { productsModel } = models;
-
 const validationProductId = (product) => {
   if (product.length === 0) {
     return {
