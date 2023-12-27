@@ -42,10 +42,10 @@ Utilizado para retornar as informações do produto com o id correspondente que 
 ##### Exemplo de saída:
 <img alt="imagem-exemplo-saida-correta-get-products-id" src="/images-readme/get-products-id-exemplo-saida.png">
 
-#### Messagens de erro
+#### Mensagens de erro
 Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenhum produto.
 
-<strong>Caso não exista produto com aquele id no banco de dados, o retorno será:</strong>
+##### Caso não exista produto com aquele id no banco de dados, o retorno será:
 ```
 {
   "message": "Product not found"
@@ -68,17 +68,17 @@ Utilizado para criar e adicionar um novo produto no banco de dados. O banco de d
 ##### Exemplo de saída:
 <img alt="imagem-exemplo-saída-correta-post-products" src="/images-readme/post-products-exemplo-saida.png">
 
-#### Messagens de erro
+#### Mensagens de erro
 Existem dois cenários onde a saída acima pode não ser retornada: caso não seja enviado um nome e caso o nome não tenha, pelo menos, 5 caracters.
 
-<strong>Retorno para caso falte o nome:</strong>
+##### Retorno para caso falte o nome:
 ```
 {
   "message": "\"name\" is required"
 }
 ```
 
-<strong>Retorno para caso name tenha menos de 5 caracters:</strong>
+##### Retorno para caso name tenha menos de 5 caracters:
 ```
 {
   "message": "\"name\" length must be at least 5 characters long"
@@ -101,17 +101,17 @@ Utilizado para atualizar o nome do produto com o id correspondente. Para isso, �
 ##### Exemplo de saída:
 <img alt="imagem-exemplo-saída-correta-put-products-id" src="/images-readme/put-products-id-exemplo-saida.png">
 
-#### Messagens de erro
+#### Mensagens de erro
 Existem dois cenários onde a saída acima pode não ser retornada: caso não seja enviado um nome e caso o nome não tenha, pelo menos, 5 caracters.
 
-<strong>Retorno para caso falte o nome:</strong>
+##### Retorno para caso falte o nome:
 ```
 {
   "message": "\"name\" is required"
 }
 ```
 
-<strong>Retorno para caso name tenha menos de 5 caracters:</strong>
+##### Retorno para caso name tenha menos de 5 caracters:
 ```
 {
   "message": "\"name\" length must be at least 5 characters long"
