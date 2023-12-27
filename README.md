@@ -18,9 +18,21 @@ Store Manager é um projeto focado em arquitetar e desenvolver uma API de gerenc
 * Chai;
 * Chai-http.
 
-<!--
 ## Rotas, entradas e saídas
 
+<details>
+<summary>Endpoint GET /products</summary><br />
+Utilizado para retornar as informações de todos os produtos que contém no banco de dados.
+
+##### Exemplo de entrada:
+<img alt="imagem-exemplo-entrada-correta-get-products" src="/images-readme/get-products-exemplo-entrada.png">
+
+##### Exemplo de saída:
+<img alt="imagem-exemplo-saida-correta-get-products" src="/images-readme/get-products-exemplo-saida.png">
+
+</details>
+
+<!--
 <details>
 <summary>Endpoint POST /login</summary><br />
 Utilizado para quando o usuário vai acessar sua conta. O banco de dados exige que o usuário insira o email e senha correta e irá retornar um token temporário como confirmação de que está correto.
@@ -87,31 +99,7 @@ Existem dois cenários onde a saída acima pode não ser retornada: caso não pr
 
 <details>
 <summary>Endpoint GET /user</summary><br />
-Utilizado para retornar as informações de todos os usuários que contém no banco de dados, porém é necessário ter um token para isso.
 
-##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-get-user" src="/images-readme/get-user-exemplo-de-entrada.png">
-
-##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saida-correta-get-user" src="/images-readme/get-user-exemplo-de-saida.png">
-
-
-#### Inserindo informações incorretas
-Existem duas formas para o banco de dados não ser acessado. Não contendo um token ou tendo um token inválido.
-
-<strong>Exemplo caso não contenha o token:</strong>
-```
-{
-  "message": "Token not found"
-}
-```
-
-<strong>Exemplo caso o token tenha expirado ou seja inválido:</strong>
-```
-{
-  "message": "Expired or invalid token"
-}
-```
 
 </details>
 
