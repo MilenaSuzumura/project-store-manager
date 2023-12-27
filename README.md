@@ -54,43 +54,46 @@ Existe apenas uma mensagem de erro que seria quando o id não corresponde a nenh
 
 </details>
 
-
-<!--
 <details>
-<summary>Endpoint POST /login</summary><br />
-Utilizado para quando o usuário vai acessar sua conta. O banco de dados exige que o usuário insira o email e senha correta e irá retornar um token temporário como confirmação de que está correto.
+<summary>Endpoint POST /products</summary><br />
+Utilizado para criar e adicionar um novo produto no banco de dados. O banco de dados exige que o usuário insira somente um nome com, no mínimo, 5 caracters.
+
+##### Informações necessárias:
+* <strong>name:</strong> É o nome do produto. Deve ser enviado como string e o mínimo de caracters é 5. É obrigatório.
 
 ##### Exemplo de entrada:
-<img alt="imagem-exemplo-de-entrada-correta-post-login" src="/images-readme/post-login-exemplo-de-entrada.png">
+<img alt="imagem-exemplo-entrada-correta-post-products" src="/images-readme/post-products-exemplo-entrada.png">
 
 ##### Exemplo de saída:
-<img alt="imagem-exemplo-de-saída-correta-post-login" src="/images-readme/post-login-exemplo-de-saida.png">
+<img alt="imagem-exemplo-saída-correta-post-products" src="/images-readme/post-products-exemplo-saida.png">
 
-#### Inserindo informações incorretas
-Existem dois cenários onde a saída acima pode não ser retornada: caso o email ou/e senha estejam incorretas e caso falte uma das duas informações. Ambas possuem retornos diferentes.
+#### Messagens de erro
+Existem dois cenários onde a saída acima pode não ser retornada: caso não seja enviado um nome e caso o nome não tenha, pelo menos, 5 caracters.
 
-<strong>Retorno para email ou/e senha incorretas:</strong>
+<strong>Retorno para caso falte o nome:</strong>
 ```
 {
-  "message": "Invalid fields"
+  "message": "\"name\" is required"
 }
 ```
 
-<strong>Retorno para caso falte alguma das duas informações:</strong>
+<strong>Retorno para caso name tenha menos de 5 caracters:</strong>
 ```
 {
-  "message": "Some required fields are missing"
+  "message": "\"name\" length must be at least 5 characters long"
 }
 ```
 
 </details>
 
+
+<!--
 <details>
 <summary>Endpoint POST /user</summary><br />
 Utilizado para criar um novo usuário. Para isso, necessita de um nome, email, senha e uma imagem. Assim como o login, retornará um token caso todas as informações enviadas foram validadas corretamente.
 
 ##### Informações necessárias:
-* <strong>displayName:</strong> É o nome e sobrenome. Deve ser enviado como string e o mínimo de caracters é 8. É obrigatório.
+
 * <strong>email:</strong> É o email e deve ser enviado como string. É obrigatório.
 * <strong>password:</strong> É a senha. Deve ser enviado como string e deve conter no mínimo 6 caracter. É obrigatório.
 * <strong>image:</strong> É uma imagem ou foto de usuário e deve ser enviado como string. Esse é o único que não é obrigatório. 
